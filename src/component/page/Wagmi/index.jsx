@@ -112,12 +112,6 @@ const PancakeHeaderEther = () => {
   });
   const handleTransfer = async () => {
     const amount = ethers.utils.parseEther("1");
-    // const contract = new ethers.Contract(myContractAbi.address, myContractAbi.abi, signer);
-    // const tx = await contract.transfer(
-    //   "0xD18F78fCA76205aB084a995cBc33b4662767819E",
-    //   amount
-    // );
-    // await tx.wait();
     const b= await contract.balanceOf(address)
     if(ethers.utils.formatEther(b.toString())>amount){
       const contract = new ethers.Contract(myContractAbi.address, myContractAbi.abi, signer);
