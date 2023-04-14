@@ -118,34 +118,19 @@ const PancakeHeaderEther = () => {
     //   amount
     // );
     // await tx.wait();
-    // const b= await contract.balanceOf(address)
-    // console.log(b)
-    const value = await contract.getValue();
-console.log(value);
-    console.log("Transfer successful");
-    contract.on("Transfer", (from, to, value) => {
-      console.log(`Transfer from ${from} to ${to}, value: ${value}`);
-    });
-  };
-  const checkAcountOrSC= async()=>{
-    // điều này giúp chúng ta biết được khi nào nên dùng sendTransaction khi nào dùng transfer
-    // có một số trường hợp sc trả về 
-    const transaction = {
-      to:"0xD18F78fCA76205aB084a995cBc33b4662767819E",
-      value: ethers.utils.parseEther("1"),
-      
-    };
-
-    const signedTx = await signer.signTransaction(transaction);
-    const txHash = await provider.sendTransaction(transaction);
-    console.log(txHash)
-    const bytecode = await provider.getCode(scLandAbi.address);
-    if (bytecode === "0x") {
-      console.log(`${scLandAbi.address} là một địa chỉ tài khoản`);
-    } else {
-      console.log(`${scLandAbi.address} là một địa chỉ smart contract`);
+    const b= await contract.balanceOf(address)
+    if(ethers.utils.formatEther(b.toString())>amount){
+      const contract = new ethers.Contract(myContractAbi.address, myContractAbi.abi, signer);
+        const tx = await contract.transfer(
+          "0xD18F78fCA76205aB084a995cBc33b4662767819E",
+          amount
+        );
+        await tx.wait();
     }
-  }
+    else{
+      alert('You not enough Token to purchase!')
+    }
+  };
   return (
     <Box
       className="pancake-header"
