@@ -99,9 +99,9 @@ const PancakeHeaderEther = () => {
     address: myContractAbi.address,
     abi: myContractAbi.abi,
     eventName: "Transfer",
-    listener(node, label, owner) {
+    listener(from, to, value) {
       console.log("Lắng nghe sự kiện từ contract");
-      console.log(node, label, owner);
+      console.log(`Address ${from} transfer to ${to}: ${ethers.utils.formatEther(value.toString())}`)
     },
   });
   const contractRead = useContractRead({
