@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Video from "./component/Video";
+import Home from "./component/header";
+import { Box, Typography } from "@mui/material";
 
+import PancakePage from "./component/page";
+// import SwapToken from './component/test/index2';
+// import PaymentForm from './component/test/index3';
+import { useWeb3React } from "@web3-react/core";
+
+// const { wallet } = useWallet();
+
+const activeChain = "ethereum";
 function App() {
+  const {
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active
+  } = useWeb3React();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+          <PancakePage/>
+    
     </div>
   );
 }
